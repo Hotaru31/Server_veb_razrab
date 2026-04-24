@@ -12,6 +12,7 @@
         <a href="/about">О нас</a> |
         <a href="/contacts">Контакты</a>
         <a href="/signin">Регистрация</a>
+        <a href="/articles">Новости</a>
     </nav>
 </header>
 

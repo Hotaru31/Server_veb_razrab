@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ArticleController;
 //главная страница
 Route::get('/', [MainController::class, 'index']);
 //страница галереи
@@ -11,6 +12,7 @@ Route::get('/gallery/{id}', [MainController::class, 'gallery']);
 Route::get('/about', function () {
     return view('about');
 });
+Route::get('/articles', [ArticleController::class, 'index']);
 //регистрация
 Route::get('/signin', [AuthController::class, 'create']);
 Route::post('/signin', [AuthController::class, 'registration']);
