@@ -12,7 +12,7 @@ Route::get('/gallery/{id}', [MainController::class, 'gallery']);
 Route::get('/about', function () {
     return view('about');
 });
-Route::get('/articles', [ArticleController::class, 'index']);
+Route::resource('articles', ArticleController::class);
 //регистрация
 Route::get('/signin', [AuthController::class, 'create']);
 Route::post('/signin', [AuthController::class, 'registration']);
