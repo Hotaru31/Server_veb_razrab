@@ -11,7 +11,16 @@
         <a href="/">Главная</a> |
         <a href="/about">О нас</a> |
         <a href="/contacts">Контакты</a> |
-        <a href="/articles">Новости</a> |
+        <a href="/articles">Новости</a>
+
+        {{-- Только для модератора --}}
+        @auth
+            @if(Auth::user()->isModerator())
+                | <a href="/articles/create">Создать новость</a>
+            @endif
+        @endauth
+
+        |
 
         @if(Auth::check())
             {{-- если пользователь авторизован --}}

@@ -16,4 +16,10 @@ class Article extends Model
         'description',
         'date',
     ];
+
+    //одна статья имеет много комментариев
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

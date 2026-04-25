@@ -16,11 +16,17 @@ class ArticleController extends Controller
 
     public function create()
     {
+        //проверка прав на создание
+        $this->authorize('create', Article::class);
+
         return view('articles.create');
     }
 
     public function store(Request $request)
     {
+        //проверка прав на создание
+        $this->authorize('create', Article::class);
+
         $validated = $request->validate([
             'title' => 'required|min:3|max:255',
             'preview_image' => 'nullable|max:255',
@@ -41,11 +47,17 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
+        //проверка прав на редактирование
+        $this->authorize('update', $article);
+
         return view('articles.edit', compact('article'));
     }
 
     public function update(Request $request, Article $article)
     {
+        //проверка прав на редактирование
+        $this->authorize('update', $article);
+
         $validated = $request->validate([
             'title' => 'required|min:3|max:255',
             'preview_image' => 'nullable|max:255',
@@ -61,6 +73,9 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
+        //проверка прав на удаление
+        $this->authorize('delete', $article);
+
         $article->delete();
 
         return redirect('/articles');

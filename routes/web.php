@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthUserController;
+use App\Http\Controllers\CommentController; // 👈 ДОБАВИЛИ
 
 // Главная страница
 Route::get('/', [MainController::class, 'index']);
@@ -28,11 +29,11 @@ Route::get('/contacts', function () {
     return view('contacts', ['contacts' => $contacts]);
 });
 
-// Старое задание 3: простая форма signin
+
 Route::get('/signin', [AuthController::class, 'create']);
 Route::post('/signin', [AuthController::class, 'registration']);
 
-//регистрация 
+//регистрация
 Route::get('/register', [AuthUserController::class, 'registerForm']);
 Route::post('/register', [AuthUserController::class, 'register']);
 
@@ -40,10 +41,18 @@ Route::post('/register', [AuthUserController::class, 'register']);
 Route::get('/login', [AuthUserController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthUserController::class, 'login']);
 
-//выход пользователя
+//выход
 Route::post('/logout', [AuthUserController::class, 'logout']);
 
-//защищенные новости от неавториз
+//новости
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('articles', ArticleController::class);
+
+    //КОММЕНТАРИИ
+
+    //добавить комментарий
+    Route::post('/articles/{article}/comments', [CommentController::class, 'store']);
+
+    //удалить комментарий
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
 });
