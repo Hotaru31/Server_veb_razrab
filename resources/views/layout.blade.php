@@ -10,9 +10,20 @@
     <nav>
         <a href="/">Главная</a> |
         <a href="/about">О нас</a> |
-        <a href="/contacts">Контакты</a>
-        <a href="/signin">Регистрация</a>
-        <a href="/articles">Новости</a>
+        <a href="/contacts">Контакты</a> |
+        <a href="/articles">Новости</a> |
+
+        @if(Auth::check())
+            {{-- если пользователь авторизован --}}
+            <form action="/logout" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit">Выйти</button>
+            </form>
+        @else
+            {{-- если не авторизован --}}
+            <a href="/register">Регистрация</a> |
+            <a href="/login">Войти</a>
+        @endif
     </nav>
 </header>
 
